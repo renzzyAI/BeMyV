@@ -1,0 +1,161 @@
+:root {
+  --berry: #b0123b;
+  --rose: #ff4d6d;
+  --cream: #fff4f7;
+  --peach: #ffd2da;
+  --ink: #3b0a1a;
+  --shadow: rgba(59, 10, 26, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #ffe2e9 0%, #f9b7c6 40%, #f48ea7 100%);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.page {
+  width: min(960px, 100%);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  background: rgba(255, 244, 247, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 28px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 24px 60px var(--shadow);
+  backdrop-filter: blur(12px);
+  display: grid;
+  gap: 20px;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.card h1,
+.card h2 {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--berry);
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #5c1c2c;
+}
+
+.tag {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.75rem;
+  color: #80253e;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  position: relative;
+  min-height: 180px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.choice {
+  border: none;
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  min-width: 140px;
+}
+
+.choice.yes {
+  background: linear-gradient(120deg, var(--berry), var(--rose));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(176, 18, 59, 0.35);
+}
+
+.choice.yes:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.choice.no {
+  background: #fff;
+  border: 2px solid rgba(176, 18, 59, 0.2);
+  color: var(--berry);
+  box-shadow: 0 8px 20px rgba(176, 18, 59, 0.12);
+  position: relative;
+  transition: left 0.18s ease-out, top 0.18s ease-out, transform 0.12s ease-out;
+  will-change: left, top;
+}
+
+.choice.no:hover {
+  transform: translateY(-1px);
+}
+
+.signature {
+  font-style: italic;
+  color: #7c3047;
+}
+
+.reveal {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.reveal.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.page.show-yes .card:first-of-type {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 32px 24px;
+  }
+
+  .choices {
+    flex-direction: column;
+  }
+
+  .choice {
+    width: 100%;
+  }
+}
